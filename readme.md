@@ -6,7 +6,7 @@
 Un inicializador de proyecto para APIs genéricas en Express, que facilita la creación rápida y estructurada de servicios web.
 
 ## Estructura del Proyecto
-
+```
 api
 |-- components
 | |-- crud.manager.ts
@@ -19,7 +19,7 @@ api
 |-- services
 | |-- service.ts
 index.ts
-
+```
 ## Funcionalidades Principales
 
 - **Estructura Modular:** Divide tu API en componentes, controladores, repositorios, rutas y servicios para una organización clara y mantenible del código.
