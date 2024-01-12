@@ -50,7 +50,7 @@ app.listen(port, () => console.log(`Server started at ${process.env.SERVER_URL}!
 ```
 
 ## Uso de Rutas
-**Ejemplo**
+**Ejemplo users.router.ts**
 ```typescript
 import { Router } from 'express';
 import CrudManager from '@CrudManager';
