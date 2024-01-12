@@ -17,8 +17,7 @@
       "@Repository": ["api/repositories/repository"],
       "@services/*": ["api/services/*"],
       "@Service": ["api/services/service"],
-      "@CrudManager": ["api/routes/crud.manager.ts"],
-      "@AwilixContainer": ["api/config/awilix.ts"]
+      "@CrudManager": ["api/components/crud.manager"],
     }
   },
   "include": ["api/**/*.ts", "node_modules/@types/**/*.d.ts"],
