@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "types": ["node", "express"],
+    "removeComments": true,
+    "preserveConstEnums": true,
+    "sourceMap": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "baseUrl": "./",
+    "experimentalDecorators": true,
+    "paths": {
+      "@routes/*": ["api/routes/*"],
+      "@controllers/*": ["api/controllers/*"],
+      "@Controller": ["api/controllers/controller"],
+      "@repositories/*": ["api/repositories/*"],
+      "@Repository": ["api/repositories/repository"],
+      "@services/*": ["api/services/*"],
+      "@Service": ["api/services/service"],
+      "@CrudManager": ["api/routes/crud.manager.ts"],
+      "@AwilixContainer": ["api/config/awilix.ts"]
+    }
+  },
+  "include": ["api/**/*.ts", "node_modules/@types/**/*.d.ts"],
+  "exclude": []
+}
