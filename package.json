@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node -r tsconfig-paths/register app/index.ts"
+    "start": "ts-node -r tsconfig-paths/register api/index.ts"
   },
   "keywords": [],
   "author": "",
