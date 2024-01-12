@@ -61,3 +61,4 @@ router.use(CrudManager.crud(UsersController));
 
 module.exports = router;
 ```
+***Se debe exportar usando CommonJS**
