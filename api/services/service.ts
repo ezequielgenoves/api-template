@@ -1,5 +1,5 @@
 export default class Service {
-  elements: any[] = [];
+  protected elements: any[] = [];
 
   findAll() {
     return this.elements;
