@@ -6,4 +6,4 @@ const port = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use('/api', apiRouter());
-app.listen(port, () => console.log(`Server started at ${process.env.SERVER_URL}!`));
+app.listen(port, () => console.log(`Server started at ${process.env.SERVER_URL}`));
