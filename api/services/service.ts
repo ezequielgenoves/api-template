@@ -1,4 +1,5 @@
 import Repository from '@Repository';
+import Entity from '@entities/entity';
 
 export default class Service {
   constructor(private _repository: Repository) {}
@@ -7,32 +8,32 @@ export default class Service {
     return this._repository;
   }
 
-  findAll() {
+  findAll(): Entity[] {
     return this.repository.findAll();
   }
 
-  findByProperty(property: string, value: any) {
+  findByProperty(property: string, value: any): Entity[] {
     return this.repository.findAll([{ property, value }]);
   }
 
-  findById(id: number) {
+  findById(id: number): Entity {
     return this.repository.findById(id);
   }
 
-  create(data: any) {
+  create(data: any): Entity {
     const element = this.repository.create(data);
     return element;
   }
 
-  update(id: number, data: any) {
+  update(id: number, data: any): Entity {
     return this.repository.update(id, data);
   }
 
-  patch(id: number, data: any) {
-    this.repository.patch(id, data);
+  patch(id: number, data: any): Entity {
+    return this.repository.patch(id, data);
   }
 
-  delete(id: number) {
+  delete(id: number): Entity {
     return this.repository.delete(id);
   }
 }
