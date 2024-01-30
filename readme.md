@@ -3,7 +3,7 @@
 [![Estado del Proyecto](https://img.shields.io/badge/Estado-En%20Desarrollo-yellow)](https://github.com/ezequielgenoves/api-template)
 [![Licencia](https://img.shields.io/badge/Licencia-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
-Un inicializador de proyecto para APIs genéricas en Express, que facilita la creación rápida y estructurada de servicios web.
+Un inicializador de proyecto para APIs genéricas en Express, que facilita la creación rápida y estructurada de servicios web siguiendo un Template Pattern.
 
 ## Estructura del Proyecto
 ```
