@@ -17,6 +17,8 @@
       "@Repository": ["api/repositories/repository"],
       "@services/*": ["api/services/*"],
       "@Service": ["api/services/service"],
+      "@entities/*": ["api/entities/*"],
+      "@Entity": ["api/entities/entity"],
       "@CrudManager": ["api/components/crud.manager"],
     }
   },

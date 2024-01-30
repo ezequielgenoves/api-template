@@ -7,16 +7,16 @@ type ControllerParams = {
 };
 
 export default class Controller {
-  constructor(service) {
+  private _req: Request;
+  private _res: Response;
+  private _service: Service;
+
+  constructor(service: Service) {
     if (!service) {
       throw new Error('Service not provided');
     }
-    this.service = service;
+    this._service = service;
   }
-
-  _req: Request;
-  _res: Response;
-  service: Service;
 
   get req() {
     return this._req;
@@ -32,6 +32,14 @@ export default class Controller {
 
   set res(res: Response) {
     this._res = res;
+  }
+
+  get service() {
+    return this._service;
+  }
+
+  set service(service: Service) {
+    this._service = service;
   }
 
   setParams(params: ControllerParams) {

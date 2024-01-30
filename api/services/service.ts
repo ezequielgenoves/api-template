@@ -1,42 +1,38 @@
-export default class Service {
-  protected elements: any[] = [];
+import Repository from '@Repository';
 
-  findAll() {
-    return this.elements;
+export default class Service {
+  constructor(private _repository: Repository) {}
+
+  get repository() {
+    return this._repository;
   }
 
-  findByProperty(property: string, value) {
-    const element = this.elements.find((user) => user[property] === value);
-    return element;
+  findAll() {
+    return this.repository.findAll();
+  }
+
+  findByProperty(property: string, value: any) {
+    return this.repository.findAll([{ property, value }]);
   }
 
   findById(id: number) {
-    return this.findByProperty("id", id);
+    return this.repository.findById(id);
   }
 
-  create(data) {
-    const id = Math.max(0, ...this.elements.map(({ id }) => id)) + 1;
-    const element = { id, ...data };
-    this.elements.push(element);
+  create(data: any) {
+    const element = this.repository.create(data);
     return element;
   }
 
-  update(id: number, data) {
-    const userIndex = this.elements.findIndex((user) => user.id === id);
-    this.elements[userIndex] = { id, ...data };
+  update(id: number, data: any) {
+    return this.repository.update(id, data);
   }
 
-  patch(id: number, data) {
-    const userIndex = this.elements.findIndex((user) => user.id === id);
-    this.elements[userIndex] = {
-      id,
-      ...this.elements[userIndex],
-      ...data,
-    };
+  patch(id: number, data: any) {
+    this.repository.patch(id, data);
   }
 
   delete(id: number) {
-    this.elements = this.elements.filter((user) => user.id === Number(id));
-    return this.elements;
+    return this.repository.delete(id);
   }
 }
