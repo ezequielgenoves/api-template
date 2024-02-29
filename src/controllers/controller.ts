@@ -6,6 +6,11 @@ type ControllerParams = {
   res: Response;
 };
 
+export type Condition = {
+  property?: string;
+  value?: any;
+};
+
 export default class Controller {
   private _req: Request;
   private _res: Response;
@@ -47,44 +52,60 @@ export default class Controller {
     this.res = params.res;
   }
 
-  findAll() {
-    const result = this.service.findAll();
-    this.res.send(result);
+  async find() {
+    if (Object.keys(this.req.query).length) return this.findFiltered();
+    return this.findAll();
   }
 
-  findById() {
+  async findFiltered() {
+    const result = await this.service.findByProperty(this.req.query);
+    return this.res.send(result);
+  }
+
+  async findAll() {
+    const result = await this.service.findAll();
+    return this.res.send(result);
+  }
+
+  async findById() {
     const { id } = this.req.params;
-    const user = this.service.findById(Number(id));
+    const user = await this.service.findById(id);
     if (!user) return this.notFound();
     return this.res.send(user);
   }
 
-  create() {
+  async create() {
     const data = this.req.body;
-    const result = this.service.create(data);
+    const result = await this.service.create(data);
     return this.res
       .status(201)
       .send({ message: 'Created successfully', result });
   }
 
-  update() {
-    const id = Number(this.req.params.id);
+  async update() {
+    const { id } = this.req.params;
     const data = this.req.body;
-    const result = this.service.update(id, data);
-    this.res.status(204).send({ message: 'Updated successfully', result });
+    const result = await this.service.update(id, data);
+    return this.res
+      .status(204)
+      .send({ message: 'Updated successfully', result });
   }
 
-  patch() {
-    const id = Number(this.req.params.id);
+  async patch() {
+    const { id } = this.req.params;
     const data = this.req.body;
-    const result = this.service.patch(id, data);
-    this.res.status(204).send({ message: 'Updated successfully', result });
+    const result = await this.service.patch(id, data);
+    return this.res
+      .status(204)
+      .send({ message: 'Updated successfully', result });
   }
 
-  delete() {
-    const id = Number(this.req.params.id);
-    const result = this.service.delete(id);
-    this.res.status(204).send({ message: 'Deleted successfully', result });
+  async delete() {
+    const { id } = this.req.params;
+    const result = await this.service.delete(id);
+    return this.res
+      .status(204)
+      .send({ message: 'Deleted successfully', result });
   }
 
   notFound() {

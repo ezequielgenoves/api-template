@@ -4,7 +4,7 @@ import { Router, Request, Response } from 'express';
 const routesMethods = [
   {
     url: '/',
-    controllerMethod: 'findAll',
+    controllerMethod: 'find',
     httpMethod: 'get'
   },
   {

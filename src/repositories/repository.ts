@@ -1,46 +1,61 @@
 import Entity from '@Entity';
-
-export type Condition = {
-  property: string;
-  value: any;
-};
+import { Condition } from '@controllers/controller';
+import mongoose, { Collection } from 'mongoose';
 
 export default class Repository {
-  private _db: any; //TODO: Implement Database Connection Pool
-  constructor(protected _entity: Entity) {
+  private _db: Collection<Entity>;
+  constructor(protected dbCollection: string) {
+    this.initializeDatabase();
   }
+
+  private async initializeDatabase() {
+    try {
+      const { connection } = mongoose;
+      this._db = connection.collection(this.dbCollection);
+    } catch (error) {
+      console.error('Error initializing database in Repository:', error);
+      throw error;
+    }
+  }
+
   get db() {
+    if (!this._db) {
+      throw new Error(
+        'Database not initialized. Ensure initializeDatabase() is called first.',
+      );
+    }
     return this._db;
   }
 
-  findAll(conditions: Condition[] = []): Entity[] {
-    const query = conditions.reduce((acc, { property, value }) => {
-      return { ...acc, [property]: value };
-    });
-    return this._db.find(query);
+  async findAll(query: Condition = {}) {
+    return this._db.find(query).toArray();
   }
 
-  findById(id: number): Entity {
+  async findById(id: string) {
     return this._db.findOne({ id });
   }
 
-  findOne(): Entity {
-    return this._db.findAll();
+  async findOne() {
+    return this._db.find();
   }
 
-  create(data: any): Entity {
-    return this._db.insert(data);
+  async create(data: any) {
+    //TODO: Return created object AND set id as a prop (get _id value)
+    return this._db.insertOne(data);
   }
 
-  update(id: number, data: any): Entity {
-    return this._db.update(id, { ...data });
+  async update(id: string, data: any) {
+    //TODO: Return updated object
+    return this._db.updateOne({ id }, { ...data });
   }
 
-  delete(id: number): Entity {
-    return this._db.remove(id);
+  async delete(id: string) {
+    return this._db.deleteOne({ id });
   }
 
-  patch(id: number, data: any): Entity {
-    return this._db.patch(id, { ...data });
+  async patch(id: string, data: any) {
+    //TODO: Return patched object
+    const record = await this._db.findOne({ id });
+    return this._db.updateOne({ id }, { ...record, ...data });
   }
 }

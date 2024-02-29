@@ -1,5 +1,5 @@
 import Repository from '@Repository';
-import Entity from '@entities/entity';
+import { Condition } from '@controllers/controller';
 
 export default class Service {
   constructor(private _repository: Repository) {}
@@ -8,32 +8,32 @@ export default class Service {
     return this._repository;
   }
 
-  findAll(): Entity[] {
+  async findAll() {
     return this.repository.findAll();
   }
 
-  findByProperty(property: string, value: any): Entity[] {
-    return this.repository.findAll([{ property, value }]);
+  async findByProperty(query: Condition) {
+    return this.repository.findAll(query);
   }
 
-  findById(id: number): Entity {
+  async findById(id: string) {
     return this.repository.findById(id);
   }
 
-  create(data: any): Entity {
+  async create(data: any) {
     const element = this.repository.create(data);
     return element;
   }
 
-  update(id: number, data: any): Entity {
+  async update(id: string, data: any) {
     return this.repository.update(id, data);
   }
 
-  patch(id: number, data: any): Entity {
+  async patch(id: string, data: any) {
     return this.repository.patch(id, data);
   }
 
-  delete(id: number): Entity {
+  async delete(id: string) {
     return this.repository.delete(id);
   }
 }
