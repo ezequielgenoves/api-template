@@ -5,34 +5,34 @@ const routesMethods = [
   {
     url: '/',
     controllerMethod: 'find',
-    httpMethod: 'get'
+    httpMethod: 'get',
   },
   {
     url: '/',
     controllerMethod: 'create',
-    httpMethod: 'post'
+    httpMethod: 'post',
   },
   {
     url: '/:id',
     controllerMethod: 'update',
-    httpMethod: 'put'
+    httpMethod: 'put',
   },
   {
-    url: '/:id',
-    controllerMethod: 'patch',
-    httpMethod: 'patch'
+    url: '/all',
+    controllerMethod: 'deleteAll',
+    httpMethod: 'delete',
   },
   {
     url: '/:id',
     controllerMethod: 'delete',
-    httpMethod: 'delete'
+    httpMethod: 'delete',
   },
   {
     url: '/:id',
     controllerMethod: 'findById',
-    httpMethod: 'get'
-  }
-]
+    httpMethod: 'get',
+  },
+];
 
 export default class CrudManager {
   private controller: Controller;
@@ -56,15 +56,12 @@ export default class CrudManager {
   private addRoute(path: string, controllerMethod: string, method = 'get') {
     const routeHandler = async (req: Request, res: Response) => {
       try {
-        if (!this.controller[controllerMethod])
-          throw new Error(
-            `Method '${controllerMethod}' not found in ${this.controller}`,
-          );
+        if (!this.controller[controllerMethod]) throw new Error(`Method '${controllerMethod}' not found in ${this.controller}`);
         this.controller.setParams({ req, res });
         await this.controller[controllerMethod]();
       } catch (e) {
         console.error(e);
-        return res.sendStatus(500);
+        return res.status(500).send({ message: e.message });
       }
     };
 

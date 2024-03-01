@@ -87,22 +87,20 @@ export default class Controller {
     const data = this.req.body;
     const result = await this.service.update(id, data);
     return this.res
-      .status(204)
-      .send({ message: 'Updated successfully', result });
-  }
-
-  async patch() {
-    const { id } = this.req.params;
-    const data = this.req.body;
-    const result = await this.service.patch(id, data);
-    return this.res
-      .status(204)
+      .status(200)
       .send({ message: 'Updated successfully', result });
   }
 
   async delete() {
     const { id } = this.req.params;
     const result = await this.service.delete(id);
+    return this.res
+      .status(204)
+      .send({ message: 'Deleted successfully', result });
+  }
+
+  async deleteAll() {
+    const result = await this.service.deleteAll();
     return this.res
       .status(204)
       .send({ message: 'Deleted successfully', result });

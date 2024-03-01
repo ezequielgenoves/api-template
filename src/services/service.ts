@@ -29,11 +29,11 @@ export default class Service {
     return this.repository.update(id, data);
   }
 
-  async patch(id: string, data: any) {
-    return this.repository.patch(id, data);
-  }
-
   async delete(id: string) {
     return this.repository.delete(id);
+  }
+
+  async deleteAll() {
+    return this.repository.deleteAll();
   }
 }
