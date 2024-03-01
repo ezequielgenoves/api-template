@@ -1,6 +1,7 @@
+import { Schema } from 'mongoose';
+
 export default class Entity {
-  protected _collection: string;
-  protected _fields: { [key: string]: any };
+  constructor(protected _collection: string, protected _fields: Schema) {}
 
   get collection() {
     return this._collection;
